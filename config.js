@@ -6,7 +6,7 @@ import fs from 'fs'
 import dotenv from 'dotenv' 
 dotenv.config()
 
-const ownervb = process.env.OWNERS;
+const ownervb = process.env.OWNERS= 'k29promax'
 if (!ownervb){
    throw new Error("OWNERS env is not set");
 }
