@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
 
-import dotenv from 'dotenv'
+import dotenv from 'dotenv' 
 dotenv.config()
 
 const ownervb = process.env.OWNERS;
