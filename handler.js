@@ -175,7 +175,7 @@ export async function handler(chatUpdate) {
                 if (!("self" in settings)) settings.self = false
                 if (!("autoread" in settings)) settings.autoread = false
                 if (!("restrict" in settings)) settings.restrict = false
-	        if (!('anticall' in settings)) settings.antiCall = true
+	        if (!('anticall' in settings)) settings.antiCall = false
                 if (!("restartDB" in settings)) settings.restartDB = 0
                 if (!("status" in settings)) settings.status = 0
 		if (!('solopv' in settings)) settings.solopv = false // el bot responde solo por dm
@@ -185,7 +185,7 @@ export async function handler(chatUpdate) {
                 self: false,
                 autoread: false,
                 restrict: false,
-	        antiCall: true,
+	        antiCall: false,
                 restartDB: 0,
 		solopv: false, 
                 sologp: false,
@@ -336,10 +336,8 @@ export async function handler(chatUpdate) {
                 if (m.chat in global.db.data.chats || m.sender in global.db.data.users) {
                     let chat = global.db.data.chats[m.chat]
                     let user = global.db.data.users[m.sender]
-                    if (name != "owner-unbanchat.js" && chat?.isBanned)
-                        return // Except this
-                    if (name != "owner-unbanuser.js" && user?.banned)
-                        return
+                    if (!['owner-unbanchat.js'].includes(name) && chat && chat.isBanned && !isROwner) return // Except this
+                    if (name != 'owner-unbanchat.js' && name != 'owner-exec.js' && name != 'owner-exec2.js' && name != 'tool-delete.js' && chat?.isBanned && !isROwner) return
                 }
                 if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Both Owner
                     fail("owner", m, this)
